@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fdd.dao.impl.SuiteReportDaoImpl" >
+  <resultMap id="SuiteResultMap" type="com.fdd.domain.SuiteReport" >
+    <result column="report_id" property="reportId" jdbcType="BIGINT" />
+    <result column="suite_name" property="suiteName" jdbcType="VARCHAR" />
+    <result column="methods_pass" property="methodsPass" jdbcType="INTEGER" />
+    <result column="methods_fail" property="methodsFail" jdbcType="INTEGER" />
+    <result column="suite_result" property="suiteResult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="paramList">
+    report_id, suite_name, methods_pass, methods_fail, suite_result
+  </sql>
+
+  <select id="queryAllSuiteReport" resultMap="SuiteResultMap">
+    SELECT
+    <include refid="paramList"/>
+    FROM
+    testsuite_report
+  </select>
+</mapper>

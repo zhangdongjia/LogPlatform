@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="LogPlatform:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="AutoTest.war">
+      <element id="artifact" artifact-name="LogPlatform:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fdd.dao.impl.LogReportDaoImpl">
+    <resultMap id="LogReportMap" type="com.fdd.domain.LogReport">
+        <result column="report_id" property="reportId" jdbcType="BIGINT" />
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="suite_name" property="suiteName" jdbcType="VARCHAR" />
+        <result column="method_name" property="methodName" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="actual" property="actual" jdbcType="VARCHAR" />
+        <result column="expected" property="expected" jdbcType="VARCHAR" />
+        <result column="is_pass" property="isPass" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="ParamList">
+        report_id, create_time, suite_name, method_name, description, actual, expected, is_pass
+    </sql>
+
+    <select id="queryAllLogReport" resultMap="LogReportMap">
+        SELECT
+        <include refid="ParamList"/>
+        FROM log_info
+    </select>
+
+    <select id="queryLogReportByIds" resultMap="LogReportMap">
+        SELECT
+        <include refid="ParamList"/>
+        FROM log_info
+        WHERE report_id IN
+        <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

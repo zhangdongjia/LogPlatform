@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fdd.dao.impl.TestReportDaoImpl" >
+  <resultMap id="TestResultMap" type="com.fdd.domain.TestReport" >
+    <id column="report_id" property="reportId" jdbcType="BIGINT" />
+    <result column="suites_pass" property="suitesPass" jdbcType="INTEGER" />
+    <result column="suites_fail" property="suitesFail" jdbcType="INTEGER" />
+    <result column="test_result" property="testResult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="paramList" >
+    report_id, suites_pass, suites_fail, test_result
+  </sql>
+
+  <select id="queryAllTestReport" resultMap="TestResultMap" >
+    select 
+    <include refid="paramList" />
+    from test_report
+  </select>
+
+</mapper>
